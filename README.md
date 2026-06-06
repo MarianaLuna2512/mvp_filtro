@@ -2,7 +2,6 @@
 # Tu artista espiritual — Propuesta de proyecto
 
 **Tipo:** Prueba de concepto (PoC) · Proyecto académico con potencial comercial  
-**Evento:** YTech  
 **Desarrollador:** 1 persona · Menos de 2 semanas
 
 ---
