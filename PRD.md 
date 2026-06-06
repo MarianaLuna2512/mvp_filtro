@@ -1,0 +1,170 @@
+Objetivo Principal
+
+Validar que un sistema de preguntas guiadas puede generar una identificación emocional con un artista musical y motivar a los usuarios a compartir su resultado.
+
+Funcionalidades Incluidas
+1. Filtro Interactivo con Cámara
+Activación mediante cámara frontal.
+Interfaz visual atractiva y dinámica.
+Experiencia optimizada para dispositivos móviles.
+2. Cuestionario Personalizado
+
+El sistema presentará entre 5 y 10 preguntas relacionadas con:
+
+Gustos musicales.
+Estados emocionales frecuentes.
+Experiencias personales significativas.
+Preferencias de estilo de vida.
+Situaciones con las que el usuario se identifica.
+3. Motor de Clasificación
+Asignación de puntajes según las respuestas.
+Asociación de perfiles emocionales con una base de artistas predefinidos.
+Selección automática del artista con mayor afinidad.
+4. Resultado Personalizado
+
+Visualización del resultado incluyendo:
+
+Nombre del artista espiritual.
+Imagen o representación visual.
+Breve descripción del porqué de la elección.
+Elementos gráficos para compartir.
+5. Compartir Resultado
+Descarga de imagen o video corto.
+Compartir en redes sociales.
+Generación de contenido viral y orgánico.
+Fuera del Alcance del MVP
+Integración directa con Spotify o YouTube.
+Uso de inteligencia artificial generativa.
+Recomendaciones musicales en tiempo real.
+Personalización basada en historial de reproducción.
+Sistema de perfiles o cuentas de usuario.
+
+Flujo de Usuario
+Paso 1: Inicio
+
+El usuario abre el filtro desde una red social, campaña o plataforma musical.
+
+Pantalla:
+"Descubre quién es tu Artista Espiritual"
+
+Botón:
+"Comenzar experiencia"
+
+Inicia la dinamica generando preguntas de respuesta multiples o si/No
+Paso 2: Activación de Cámara
+
+El filtro activa la cámara frontal y muestra una introducción breve sobre la experiencia.
+
+Paso 3: Respuesta de Preguntas
+
+El usuario responde una secuencia de preguntas interactivas relacionadas con:
+
+Emociones.
+Personalidad.
+Recuerdos.
+Gustos musicales.
+Momentos importantes de su vida.
+
+Ejemplo:
+
+¿Qué emoción buscas cuando escuchas música?
+¿Cuál describe mejor tu personalidad?
+¿Qué tipo de experiencia te transforma más?
+
+Paso 4: Procesamiento
+
+El sistema analiza las respuestas y calcula el perfil emocional predominante.
+
+Animación de espera:
+
+"Estamos encontrando tu Artista Espiritual..."
+
+Paso 5: Resultado
+
+El usuario recibe un resultado personalizado.
+
+Ejemplo:
+
+Tu Artista Espiritual es: Taylor Swift
+
+"Porque conectas profundamente con las emociones, los recuerdos y las historias personales."
+
+Paso 6: Compartir
+
+Opciones para:
+
+Compartir en redes sociales.
+Guardar resultado.
+Repetir experiencia.
+
+# Criterios de Éxito del MVP
+
+## 1. Experiencia de Usuario
+
+### Flujo sin fricciones (Mínimo Viable)
+
+El usuario debe poder completar el cuestionario de principio a fin de manera intuitiva, sin errores, bloqueos o interrupciones. Cada pregunta debe ser clara, fácil de entender y contar con opciones de respuesta mutuamente excluyentes para evitar ambigüedades en la selección.
+
+### Tiempo de sesión (Mínimo Viable)
+
+La experiencia completa debe finalizarse en menos de tres minutos. Mantener una duración corta es fundamental para reducir la tasa de abandono y garantizar una interacción ágil y atractiva.
+
+### Diseño atractivo (Ideal)
+
+La interfaz debe reflejar una identidad visual coherente con el universo musical del producto, utilizando una combinación consistente de tipografías, colores, imágenes y animaciones. El resultado final debe presentarse en una tarjeta visualmente atractiva que incentive a los usuarios a compartirla.
+
+### Diseño responsivo (Ideal)
+
+El prototipo debe ofrecer una experiencia consistente tanto en dispositivos móviles como en escritorio, asegurando una correcta visualización de todos los elementos, sin errores de maquetación, textos cortados o componentes desalineados.
+
+---
+
+## 2. Calidad del Matching
+
+### Resultados creíbles (Mínimo Viable)
+
+El sistema debe generar resultados que los usuarios perciban como relevantes y coherentes con sus respuestas. Como objetivo de validación, al menos el 80% de los participantes en pruebas iniciales deberían considerar que el artista asignado refleja adecuadamente su perfil emocional o musical.
+
+### Diversidad de resultados (Mínimo Viable)
+
+El modelo de clasificación debe distribuir los resultados de manera equilibrada entre los artistas disponibles. Todos los perfiles incluidos en el catálogo deben ser alcanzables y ningún artista debería concentrar más del 40% de las asignaciones durante las pruebas.
+
+### Explicación personalizada del resultado (Ideal)
+
+La experiencia no debe limitarse a mostrar el nombre del artista seleccionado. El resultado debe incluir una explicación breve que conecte las respuestas del usuario con las características, emociones o valores asociados al artista, fortaleciendo la sensación de identificación.
+
+### Variación basada en respuestas (Ideal)
+
+Si un usuario realiza nuevamente el cuestionario y modifica sus respuestas, el sistema debe reflejar esos cambios mediante resultados diferentes y coherentes. Esto demuestra que el matching responde efectivamente a las preferencias expresadas y no a una asignación aleatoria.
+
+---
+
+## 3. Funcionamiento Técnico
+
+Estabilidad del prototipo (Mínimo Viable)
+
+Todos los recorridos posibles dentro del cuestionario deben completarse correctamente y conducir a un resultado final. Durante las demostraciones y pruebas no deben presentarse errores críticos, pantallas en blanco o bloqueos de la aplicación.
+
+### Rendimiento y velocidad (Mínimo Viable)
+
+La aplicación debe cargar en menos de tres segundos bajo condiciones normales de conexión. Una vez finalizado el cuestionario, el cálculo y presentación del resultado deben realizarse de forma inmediata.
+
+Arquitectura escalable (Ideal)
+
+El código debe estar organizado de manera modular y mantenible. La lógica de clasificación de artistas debe encontrarse desacoplada de la interfaz visual, permitiendo ampliar fácilmente el catálogo de artistas, preguntas o reglas de matching en futuras versiones.
+
+---
+
+ 4. Potencial Comercial
+
+ Propuesta de valor clara (Mínimo Viable)
+
+La solución debe comunicar claramente qué problema resuelve para plataformas musicales como Spotify o YouTube Music, qué tipo de información genera y cómo esos datos pueden aportar valor a estrategias de personalización, segmentación y engagement.
+
+### Demo funcional como evidencia (Mínimo Viable)
+
+El MVP debe servir como una demostración tangible del concepto. Más allá de una presentación teórica, el prototipo debe permitir visualizar de manera práctica cómo funcionaría la experiencia integrada dentro de una plataforma musical.
+
+Validación del potencial viral (Ideal)
+
+Durante las pruebas, al menos un usuario debería manifestar de forma espontánea el deseo de compartir su resultado con otras personas. Este comportamiento validaría el potencial de viralización y difusión orgánica de la experiencia.
