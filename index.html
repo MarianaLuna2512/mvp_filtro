@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tu Artista Espiritual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top left, #ffb3bc 0%, #f2d7d5 35%, #f7f7f7 100%);
+      color: #111;
+      line-height: 1.5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app {
+      width: min(100%, 960px);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.04em;
+    }
+
+    header p {
+      margin: 12px auto 0;
+      max-width: 680px;
+      color: #333;
+      font-size: 1rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 18px 55px rgba(20, 15, 55, 0.12);
+      border-radius: 28px;
+      padding: 28px;
+      backdrop-filter: blur(14px);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .question-number {
+      margin: 0 0 12px;
+      color: #9a5bff;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.82rem;
+    }
+
+    .question-text {
+      margin: 0 0 24px;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      font-weight: 600;
+    }
+
+    .options {
+      display: grid;
+      gap: 14px;
+    }
+
+    .option-button {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 18px;
+      padding: 18px 20px;
+      text-align: left;
+      background: white;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      font-size: 1rem;
+      color: #1b1b1b;
+    }
+
+    .option-button:hover {
+      transform: translateY(-2px);
+      border-color: #805ad5;
+    }
+
+    .option-button.active {
+      border-color: #7b3cff;
+      box-shadow: 0 12px 24px rgba(123, 60, 255, 0.14);
+      background: #f8f4ff;
+    }
+
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 16px 26px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #7b3cff 0%, #ff759a 100%);
+      color: white;
+      box-shadow: 0 16px 35px rgba(123, 60, 255, 0.22);
+    }
+
+    .secondary-btn {
+      background: transparent;
+      color: #333;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .result-card {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+      grid-template-columns: minmax(0, 320px) 1fr;
+    }
+
+    .result-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      object-fit: cover;
+      min-height: 320px;
+    }
+
+    .result-content p,
+    .result-content h2 {
+      margin: 0;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tag-list li {
+      background: #f5f0ff;
+      color: #5c2bff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+    }
+
+    .small {
+      color: #555;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+    }
+
+    .songs ol {
+      margin: 12px 0 0;
+      padding-left: 1.2rem;
+      color: #2c2c2c;
+    }
+
+    .songs li {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 720px) {
+      .result-card {
+        grid-template-columns: 1fr;
+      }
+
+      .result-card img {
+        min-height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Tu Artista Espiritual</h1>
+      <p>Responde 5 preguntas y descubre qué leyenda musical encaja con tu forma de sentir la música.</p>
+    </header>
+
+    <section id="quiz" class="card">
+      <p class="question-number" id="step-label"></p>
+      <h2 class="question-text" id="question-text"></h2>
+      <div class="options" id="options"></div>
+      <div class="actions">
+        <button id="next-btn" class="primary-btn" disabled>Siguiente</button>
+        <button id="restart-btn" class="secondary-btn hidden">Volver a jugar</button>
+      </div>
+    </section>
+
+    <section id="result" class="card hidden">
+      <div class="result-card">
+        <img id="result-image" src="" alt="Imagen del artista" />
+        <div class="result-content">
+          <p class="small">Tu artista espiritual</p>
+          <h2 id="result-name"></h2>
+          <p id="result-description"></p>
+          <ul id="result-tags" class="tag-list"></ul>
+          <div class="songs">
+            <p class="small">Canciones para tu mood</p>
+            <ol id="result-songs"></ol>
+          </div>
+        </div>
+      </div>
+      <div class="actions" style="margin-top: 6px;">
+        <button id="restart-btn-2" class="primary-btn">Jugar otra vez</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: '¿Qué buscas cuando escuchas música?',
+        options: [
+          { label: 'Escapar de la realidad y divertirme.', scores: { badbunny: 2, hector: 1 } },
+          { label: 'Sentirme empoderado/a y seguro/a.', scores: { shakira: 2, freddy: 1 } },
+          { label: 'Conectar con mis emociones más profundas.', scores: { bob: 2, ariana: 1 } },
+          { label: 'Inspirarme para perseguir mis metas.', scores: { freddy: 2, shakira: 1 } },
+          { label: 'Sentirme comprendido/a.', scores: { ariana: 2, bob: 1 } }
+        ]
+      },
+      {
+        text: 'Si tu vida fuera una película, ¿qué escena tendría tu banda sonora ideal?',
+        options: [
+          { label: 'Una fiesta inolvidable con amigos.', scores: { badbunny: 2, hector: 1 } },
+          { label: 'Un momento donde supero un reto importante.', scores: { freddy: 2, shakira: 1 } },
+          { label: 'Un viaje lleno de aventuras.', scores: { badbunny: 1, willy: 2 } },
+          { label: 'Una historia de amor intensa.', scores: { ariana: 2, shakira: 1 } },
+          { label: 'Un momento de reflexión personal.', scores: { bob: 2, ariana: 1 } }
+        ]
+      },
+      {
+        text: '¿Cuál de estas frases te representa más?',
+        options: [
+          { label: '"Vivo el momento."', scores: { badbunny: 2, hector: 1 } },
+          { label: '"Siempre busco crecer."', scores: { shakira: 2, ariana: 1 } },
+          { label: '"Mis emociones son mi fuerza."', scores: { bob: 2, ariana: 1 } },
+          { label: '"Me gusta romper las reglas."', scores: { freddy: 2, badbunny: 1 } },
+          { label: '"Quiero dejar huella."', scores: { willy: 2, freddy: 1 } }
+        ]
+      },
+      {
+        text: 'Cuando atraviesas una etapa difícil, la música te ayuda a...',
+        options: [
+          { label: 'Distraerme y pasarla bien.', scores: { badbunny: 2, hector: 1 } },
+          { label: 'Sacar mi lado más fuerte.', scores: { freddy: 2, shakira: 1 } },
+          { label: 'Entender lo que siento.', scores: { ariana: 2, bob: 1 } },
+          { label: 'Reinventarme.', scores: { shakira: 2, freddy: 1 } },
+          { label: 'Encontrar esperanza.', scores: { bob: 2, ariana: 1 } }
+        ]
+      },
+      {
+        text: '¿Qué tipo de artista te inspira más?',
+        options: [
+          { label: 'El que transforma la industria.', scores: { badbunny: 2, freddy: 1 } },
+          { label: 'El que representa autenticidad.', scores: { bob: 2, hector: 1 } },
+          { label: 'El que convierte emociones en arte.', scores: { ariana: 2, shakira: 1 } },
+          { label: 'El que siempre evoluciona.', scores: { shakira: 2, badbunny: 1 } },
+          { label: 'El que conecta con millones de personas.', scores: { bob: 2, freddy: 1 } }
+        ]
+      }
+    ];
+
+    const artists = {
+      badbunny: {
+        name: 'Bad Bunny',
+        image: 'assets/bad-bunny.jpg',
+        description: 'Tu energía es sin etiquetas: divertido, auténtico y capaz de vivir lo serio y lo fiestero al mismo tiempo.',
+        tags: ['Autenticidad', 'Fluidez', 'Presente'],
+        songs: ['Safaera', 'Yo Perreo Sola', 'Titi Me Preguntó']
+      },
+      bob: {
+        name: 'Bob Marley',
+        image: 'assets/bob-marley.jpg',
+        description: 'Tu espíritu busca paz y verdad. Eres resiliente, consciente y tienes una conexión fuerte con las emociones y el entorno.',
+        tags: ['Libertad', 'Conexión', 'Esperanza'],
+        songs: ['Three Little Birds', 'Redemption Song', 'One Love']
+      },
+      ariana: {
+        name: 'Ariana Grande',
+        image: 'assets/ariana-grande.jpg',
+        description: 'Eres sensibilidad, autoconocimiento y fuerza que sale de reconocer tus emociones y sanar con estilo.',
+        tags: ['Vulnerabilidad', 'Resiliencia', 'Glam'],
+        songs: ['7 rings', 'thank u, next', 'breathin']
+      },
+      shakira: {
+        name: 'Shakira',
+        image: 'assets/shakira.jpg',
+        description: 'Tu energía es de transformación: te reinventas, te levantas y conviertes la emoción en un mensaje poderoso.',
+        tags: ['Resiliencia', 'Evolución', 'Fuerza'],
+        songs: ['Hips Don’t Lie', 'Whenever, Wherever', 'Try Everything']
+      },
+      freddy: {
+        name: 'Freddy Mercury',
+        image: 'assets/freddy-mercury.jpg',
+        description: 'Vives con intensidad y no temes brillar. Tu estilo es teatral, libre y dueño de tu propia historia.',
+        tags: ['Audacia', 'Confianza', 'Originalidad'],
+        songs: ['Bohemian Rhapsody', 'Don’t Stop Me Now', 'Somebody to Love']
+      },
+      hector: {
+        name: 'Héctor Lavoe',
+        image: 'assets/hector-lavoe.jpg',
+        description: 'Eres calle, historia y sentimiento auténtico. Tu música es la de quien vive la experiencia con el corazón en la mano.',
+        tags: ['Raíces', 'Pasión', 'Realismo'],
+        songs: ['El Cantante', 'Mi Gente', 'Periódico de Ayer']
+      },
+      willy: {
+        name: 'Willie Colón',
+        image: 'assets/willy-colon.jpg',
+        description: 'Tu fuerza está en la calle y en contar historias reales. Eres líder, directo y poderoso en tu identidad.',
+        tags: ['Rebeldía', 'Carisma', 'Historia'],
+        songs: ['Idilio', 'La Murga', 'Gitana']
+      }
+    };
+
+    const state = {
+      currentQuestion: 0,
+      selectedOption: null,
+      scores: {
+        badbunny: 0,
+        bob: 0,
+        ariana: 0,
+        shakira: 0,
+        freddy: 0,
+        hector: 0,
+        willy: 0
+      }
+    };
+
+    const stepLabel = document.getElementById('step-label');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options');
+    const nextBtn = document.getElementById('next-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    const restartBtn2 = document.getElementById('restart-btn-2');
+    const quizSection = document.getElementById('quiz');
+    const resultSection = document.getElementById('result');
+    const resultImage = document.getElementById('result-image');
+    const resultName = document.getElementById('result-name');
+    const resultDescription = document.getElementById('result-description');
+    const resultTags = document.getElementById('result-tags');
+    const resultSongs = document.getElementById('result-songs');
+
+    function renderQuestion() {
+      const question = questions[state.currentQuestion];
+      stepLabel.textContent = `Pregunta ${state.currentQuestion + 1} de ${questions.length}`;
+      questionText.textContent = question.text;
+      optionsContainer.innerHTML = '';
+      state.selectedOption = null;
+      nextBtn.disabled = true;
+      question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'option-button';
+        button.textContent = option.label;
+        button.addEventListener('click', () => selectOption(index, button));
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    function selectOption(index, button) {
+      state.selectedOption = index;
+      nextBtn.disabled = false;
+      const buttons = Array.from(optionsContainer.querySelectorAll('.option-button'));
+      buttons.forEach((btn, btnIndex) => {
+        btn.classList.toggle('active', btnIndex === index);
+      });
+    }
+
+    function applyScores() {
+      const selected = questions[state.currentQuestion].options[state.selectedOption];
+      Object.entries(selected.scores).forEach(([artist, value]) => {
+        state.scores[artist] += value;
+      });
+    }
+
+    function showResult() {
+      const winnerKey = Object.keys(state.scores).reduce((best, key) => {
+        return state.scores[key] > state.scores[best] ? key : best;
+      }, 'badbunny');
+
+      const winner = artists[winnerKey];
+      resultImage.src = winner.image;
+      resultImage.alt = `Foto de ${winner.name}`;
+      resultName.textContent = winner.name;
+      resultDescription.textContent = winner.description;
+      resultTags.innerHTML = winner.tags.map(tag => `<li>${tag}</li>`).join('');
+      resultSongs.innerHTML = winner.songs.map(song => `<li>${song}</li>`).join('');
+      quizSection.classList.add('hidden');
+      resultSection.classList.remove('hidden');
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (state.selectedOption === null) return;
+      applyScores();
+      state.currentQuestion += 1;
+      if (state.currentQuestion >= questions.length) {
+        showResult();
+        return;
+      }
+      renderQuestion();
+    });
+
+    function resetQuiz() {
+      state.currentQuestion = 0;
+      state.selectedOption = null;
+      Object.keys(state.scores).forEach(key => state.scores[key] = 0);
+      quizSection.classList.remove('hidden');
+      resultSection.classList.add('hidden');
+      renderQuestion();
+      restartBtn.classList.add('hidden');
+    }
+
+    restartBtn.addEventListener('click', resetQuiz);
+    restartBtn2.addEventListener('click', resetQuiz);
+    renderQuestion();
+  </script>
+</body>
+</html>
